@@ -26,4 +26,4 @@ export function Header(props) {
   )
 }
 
-// Convertido para functions
+// Convertido para function
