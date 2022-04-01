@@ -3,26 +3,16 @@ import { useEffect } from 'react';
 import ReactModal from 'react-modal';
 
 export function Modal(props) {
-  // constructor(props) {
-  //   super(props);
+  const { isOpen } = props;
+  const [modalStatus, setModalStatus] = useState(false)
 
-  //   const { isOpen } = this.props;
-  //   this.state = {
-  //     modalStatus: isOpen
-  //   }
-  // }
-
-  componentDidUpdate(prevProps) {
-    const { isOpen } = this.props;
-
-    if (prevProps.isOpen !== isOpen) {
-      console.log(this.props)
-      this.setState({ modalStatus: isOpen })
+  useEffect((prevProps) => {
+    if (prevProps !== isOpen) {
+      setModalStatus(isOpen)
     }
-  }
+  }, [isOpen])
 
-  const { children, setIsOpen } = this.props;
-  const { modalStatus } = this.state;
+  const { children, setIsOpen } = props;
 
   return (
     <ReactModal
@@ -52,5 +42,6 @@ export function Modal(props) {
       {children}
     </ReactModal>
   );
-}
+}  
 
+// Convertido para function
