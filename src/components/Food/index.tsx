@@ -4,12 +4,25 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { Container } from './styles';
 import api from '../../services/api';
 
-export function Food(props) {
-  const { food } = props;
+interface InternalFoodProps {
+  id: number,
+  name: string,
+  description: string,
+  price: number,
+  available: Boolean,
+  image: string;
+}
+
+interface FoodProps {
+  food: InternalFoodProps,
+  handleEditFood: (food: InternalFoodProps) => void,
+  handleDelete: (id: number) => void;
+}
+
+export function Food({ food, handleEditFood, handleDelete }: FoodProps) {
   const [isAvailable, setIsAvailable] = useState(true)
   
   const toggleAvailable = async () => {
-
     await api.put(`/foods/${food.id}`, {
       ...food,
       available: !isAvailable,
@@ -19,12 +32,8 @@ export function Food(props) {
   }
 
   const setEditingFood = () => {
-    const { handleEditFood } = props;
-
     handleEditFood(food);
   }
-
-  const { handleDelete } = props;
 
   return (
     <Container available={isAvailable}>
@@ -78,4 +87,4 @@ export function Food(props) {
   );
 }
 
-// Convertido para funções 
+// Convertido para funtions e TS
